@@ -6,7 +6,16 @@ using System.Threading.Tasks;
 
 namespace DLL.Models
 {
-    internal class Seller
+    public class Seller
     {
+        public int Id { get; set; }
+        
+
+        public User? User { get; set; }
+
+        public int UserId { get; set; }
+
+
+
     }
 }

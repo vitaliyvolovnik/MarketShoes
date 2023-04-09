@@ -29,8 +29,7 @@ namespace MarketShoesApi.Controllers
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
                 Date = DateTime.Now.AddDays(index),
-                TemperatureC = Random.Shared.Next(-20, 55),
-                Summary = userClaims.FirstOrDefault(o => o.Type == ClaimTypes.Email).Value
+                TemperatureC = Random.Shared.Next(-20, 55), 
             })
             .ToArray();
         }
