@@ -10,8 +10,4 @@
     <ProjectReference Include="..\DLL\DLL.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Configurations\" />
-  </ItemGroup>
-
 </Project>

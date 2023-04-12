@@ -1,6 +1,6 @@
 ﻿using DLL.Context;
 using DLL.Models;
-
+using Microsoft.EntityFrameworkCore;
 
 namespace DLL.Repositories
 {
@@ -28,7 +28,7 @@ namespace DLL.Repositories
             return true;
         }
         
-        public async Task<bool> ConfirmEmail(string email)
+        public async Task<bool> ConfirmEmailAsync(string email)
         {
             var user = await Entities.FirstOrDefaultAsync(u => u.Email == email);
             if (user == null)
@@ -39,6 +39,12 @@ namespace DLL.Repositories
 
             return true;
         }
+
+        public async Task<User?> LoginAsync(string email, string passwordHash)
+        {
+            return await Entities.FirstOrDefaultAsync(u => u.Email == email && u.Password == passwordHash && u.IsEmailConfirm);
+        }
+
 
 
     }
