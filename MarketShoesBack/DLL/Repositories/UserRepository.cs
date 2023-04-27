@@ -42,7 +42,7 @@ namespace DLL.Repositories
 
         public async Task<User?> LoginAsync(string email, string passwordHash)
         {
-            return await Entities.FirstOrDefaultAsync(u => u.Email == email && u.Password == passwordHash && u.IsEmailConfirm);
+            return await Entities.FirstOrDefaultAsync(u => u.Email == email && u.Password == passwordHash /*&& u.IsEmailConfirm*/);
         }
 
 

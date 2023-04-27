@@ -19,7 +19,7 @@ namespace BLL.Services
 
         public async Task<User?> Registration(RegisterationModel registeration)
         {
-            if ( _userRepository.IsEmailExist(registeration.Email))
+            if (!_userRepository.IsEmailExist(registeration.Email))
                 return await _userRepository.CreateAsync(new User()
                 {
                     Email = registeration.Email,

@@ -19,7 +19,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-//ConfigureBll.Configere(builder.Services, config["ConnectionString"]);
+ConfigureBll.Configere(builder.Services, config["ConnectionString"]);
 
 
 
@@ -50,6 +50,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseStaticFiles();
 app.UseHttpsRedirection();
 
 app.UseRouting();

@@ -13,6 +13,10 @@ namespace DLL.Models
         public User? User { get; set; }
 
         public int UserId { get; set; }
+        
+
+        public Basket Basket { get; set; }
+
 
     }
 }
