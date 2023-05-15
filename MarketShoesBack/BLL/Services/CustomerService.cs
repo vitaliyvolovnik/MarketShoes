@@ -4,12 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DLL.Models.Enums
+namespace BLL.Services
 {
-    public enum OrderState
+    public class CustomerService
     {
-        InLine,
-        Completed,
-        Canseled,
     }
 }

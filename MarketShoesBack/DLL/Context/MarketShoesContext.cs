@@ -9,7 +9,7 @@ namespace DLL.Context
         public MarketShoesContext(DbContextOptions<MarketShoesContext> options) : base(options)
         {
 
-            Database.EnsureCreated();
+            //Database.EnsureCreated();
         }
 
         public DbSet<User> Users { get; set; }
@@ -70,7 +70,11 @@ namespace DLL.Context
                 .HasOne(x => x.Seller)
                 .WithMany(x => x.Products)
                 .HasForeignKey(x => x.SellerId)
-                .IsRequired(true);
+                .IsRequired();
+            builder
+                .HasMany(x => x.Characteristics)
+                .WithMany(x=>x.Products);
+                
             
         }
 
@@ -80,7 +84,7 @@ namespace DLL.Context
                 .HasMany(x=>x.BasketElements)
                 .WithOne(x=>x.Basket)
                 .HasForeignKey(x=>x.BasketId)
-                .IsRequired(true);
+                .IsRequired();
 
         }
 
@@ -88,7 +92,7 @@ namespace DLL.Context
         {
             builder
                 .HasMany(x=>x.SubCharacteristics)
-                .WithOne(x=>x.Сharacteristic)
+                .WithOne(x=>x.Characteristic)
                 .HasForeignKey(x=>x.CharacteristicId)
                 .IsRequired();
         }

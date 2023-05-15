@@ -11,8 +11,22 @@ namespace BLL.Configurations
         public static void Configere(IServiceCollection collection,string connectionString)
         {
             collection.AddDbContext<MarketShoesContext>(o => o.UseSqlServer(connectionString));
+            
+            
+            
+            //repositories
             collection.AddTransient<UserRepository>();
+            collection.AddTransient<ProductRepository>();
+            collection.AddTransient<SellerRepository>();
+            collection.AddTransient<CharacteristicRepository>();
+            collection.AddTransient<SubCharacteristicRepository>();
+
+
+
+
+            //services
             collection.AddTransient<AuthorizeService>();
+            collection.AddTransient<SellerService>();
             
         }
 

@@ -28,11 +28,11 @@ namespace MarketShoesApi.Controllers
         }
 
 
-        
-        [HttpPost("login",Name ="Login")]
+
+        [HttpPost("login", Name = "Login")]
         public async Task<IActionResult> Login([FromBody] LoginModel loginModel)
         {
-            var user =  await _authorizeService.LoginAsync(loginModel);
+            var user = await _authorizeService.LoginAsync(loginModel);
             if (user != null)
             {
                 var token = GenerateJwt(user);
@@ -41,8 +41,8 @@ namespace MarketShoesApi.Controllers
             return NotFound("User not found");
         }
 
-        
-        [HttpPost("register",Name = "Register")]
+
+        [HttpPost("register", Name = "Register")]
         public async Task<IActionResult> Register([FromBody] RegisterationModel registerationModel)
         {
             var user = await _authorizeService.Registration(registerationModel);
@@ -72,7 +72,8 @@ namespace MarketShoesApi.Controllers
                 new Claim(ClaimTypes.Email,user.Email),
                 new Claim(ClaimTypes.GivenName,user.Firstname),
                 new Claim(ClaimTypes.Surname,user.Lastname),
-                new Claim(ClaimTypes.Role,user.Role)
+                new Claim(ClaimTypes.Role,user.Role),
+                new Claim("SellerCustomerIdClime",((user.Role == "Seller")?user.Seller.Id:user.Customer.Id).ToString())
             };
 
             var token = new JwtSecurityToken(_config["Jwt:Issuer"],
@@ -84,7 +85,7 @@ namespace MarketShoesApi.Controllers
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
-        
+
 
 
 

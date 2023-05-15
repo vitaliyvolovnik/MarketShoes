@@ -14,7 +14,6 @@ namespace DLL.Models
 
         public int UserId { get; set; }
         
-
         public Basket Basket { get; set; }
 
 

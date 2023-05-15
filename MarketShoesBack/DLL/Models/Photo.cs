@@ -4,12 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DLL.Models.Enums
+namespace DLL.Models
 {
-    public enum OrderState
+    public class Photo
     {
-        InLine,
-        Completed,
-        Canseled,
+        public int Id { get; set; }
+        public string Path { get; set; }
     }
 }

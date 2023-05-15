@@ -13,7 +13,9 @@ namespace DLL.Models
         public string Name { get; set; }
         
         public List<SubCharacteristic> Characteristics { get; set; } = new List<SubCharacteristic>();
-        public List<string> Photos { get; set; } = new List<string>();
+
+
+        public List<Photo> Photos { get; set; } = new List<Photo>();
         
         public Seller Seller { get; set; }
 
@@ -22,5 +24,9 @@ namespace DLL.Models
         public decimal Price { get; set; }
 
         public string Code { get; set; }
+
+        public int Count { get; set; }
+
+        public bool IsAvailable { get; set; }
     }
 }

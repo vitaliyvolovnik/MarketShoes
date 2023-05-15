@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DLL.Models.Enums
+namespace BLL.Services.Interfaces
 {
-    public enum OrderState
+    public interface ISellerService
     {
-        InLine,
-        Completed,
-        Canseled,
+        
+
+
+
     }
 }

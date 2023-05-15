@@ -14,10 +14,13 @@ namespace DLL.Models
         public double Rating { get; set; }
         
         public Product Product { get; set; }
+        public int ProductId { get; set; }
+
         public Customer Customer { get; set; }
-        
+        public int CustomerId { get; set; }
+
         public DateTime CreatedTime { get; set; }
 
-        public List<string> Photos { get; set; } = new List<string>();
+        public List<Photo> Photos { get; set; } = new List<Photo>();
     }
 }

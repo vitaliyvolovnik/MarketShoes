@@ -48,6 +48,13 @@ namespace DLL.Repositories
             return await Entities.ToListAsync();
         }
 
+        public virtual async Task<T?> FindFirstAsync(Expression<Func<T, bool>> predicate)
+        {
+            return await Entities.FirstOrDefaultAsync(predicate);
+        }
+
+
+
         public async Task SaveChangesAsync()
         {
             await _context.SaveChangesAsync().ConfigureAwait(false);
