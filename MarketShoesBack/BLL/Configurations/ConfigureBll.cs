@@ -17,9 +17,13 @@ namespace BLL.Configurations
             //repositories
             collection.AddTransient<UserRepository>();
             collection.AddTransient<ProductRepository>();
-            collection.AddTransient<SellerRepository>();
             collection.AddTransient<CharacteristicRepository>();
             collection.AddTransient<SubCharacteristicRepository>();
+            collection.AddTransient<BasketItemRepository>();
+            collection.AddTransient<OrderRepository>();
+            collection.AddTransient<UserTokenRepository>();
+            collection.AddTransient<FeedbackRepository>();
+
 
 
 
@@ -27,6 +31,10 @@ namespace BLL.Configurations
             //services
             collection.AddTransient<AuthorizeService>();
             collection.AddTransient<SellerService>();
+            collection.AddTransient<CustomerService>();
+            collection.AddTransient<UserService>();
+            collection.AddTransient<EmailService>();
+
             
         }
 

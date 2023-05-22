@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DLL.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,17 @@ namespace BLL.Services.Interfaces
 {
     public interface IBasketService
     {
+
+
+
+
+        Task<BasketItem?> AddToBasketAsync(BasketItem element,int customerId);
+
+        Task RemoveFromBasketAsync(int basketElementId);
+
+        Task ClearAsync(int customerId);
+
+        Task<BasketItem?> UpdateBusketElement(BasketItem element,int elementId);
+
     }
 }

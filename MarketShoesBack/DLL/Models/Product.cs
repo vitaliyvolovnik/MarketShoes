@@ -17,8 +17,7 @@ namespace DLL.Models
 
         public List<Photo> Photos { get; set; } = new List<Photo>();
         
-        public Seller Seller { get; set; }
-
+        public User Seller { get; set; }
         public int SellerId { get; set; }
         
         public decimal Price { get; set; }
@@ -28,5 +27,8 @@ namespace DLL.Models
         public int Count { get; set; }
 
         public bool IsAvailable { get; set; }
+
+        public List<Feedback> Feedbacks { get; set; }
+
     }
 }

@@ -37,7 +37,7 @@ namespace DLL.Migrations
                     b.ToTable("Baskets");
                 });
 
-            modelBuilder.Entity("DLL.Models.BasketElement", b =>
+            modelBuilder.Entity("DLL.Models.BasketItem", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -312,7 +312,7 @@ namespace DLL.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("DLL.Models.BasketElement", b =>
+            modelBuilder.Entity("DLL.Models.BasketItem", b =>
                 {
                     b.HasOne("DLL.Models.Basket", "Basket")
                         .WithMany("BasketElements")
@@ -321,7 +321,7 @@ namespace DLL.Migrations
                         .IsRequired();
 
                     b.HasOne("DLL.Models.Order", null)
-                        .WithMany("BasketElement")
+                        .WithMany("BasketItem")
                         .HasForeignKey("OrderId");
 
                     b.HasOne("DLL.Models.Product", "Product")
@@ -423,7 +423,7 @@ namespace DLL.Migrations
 
             modelBuilder.Entity("DLL.Models.SubCharacteristic", b =>
                 {
-                    b.HasOne("DLL.Models.BasketElement", null)
+                    b.HasOne("DLL.Models.BasketItem", null)
                         .WithMany("SubCharacteristics")
                         .HasForeignKey("BasketElementId");
 
@@ -445,7 +445,7 @@ namespace DLL.Migrations
                     b.Navigation("BasketElements");
                 });
 
-            modelBuilder.Entity("DLL.Models.BasketElement", b =>
+            modelBuilder.Entity("DLL.Models.BasketItem", b =>
                 {
                     b.Navigation("SubCharacteristics");
                 });
@@ -462,7 +462,7 @@ namespace DLL.Migrations
 
             modelBuilder.Entity("DLL.Models.Order", b =>
                 {
-                    b.Navigation("BasketElement");
+                    b.Navigation("BasketItem");
                 });
 
             modelBuilder.Entity("DLL.Models.Product", b =>

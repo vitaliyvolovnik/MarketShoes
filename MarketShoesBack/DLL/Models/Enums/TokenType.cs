@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace DLL.Models.Enums
 {
-    public enum OrderState
+    public enum TokenType
     {
-        InLine,
-        Completed,
-        Canseled,
+        EMAIL_CONFIRMATION,
+        PASSWORD_RESET
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace DLL.Models
@@ -14,20 +15,33 @@ namespace DLL.Models
 
         public bool IsEmailConfirm { get; set; }
 
-        public string? Number { get; set; }
-
+        [JsonIgnore]
         public string? Password { get; set; }
         
         public string? Role { get; set; }
 
-        public string? Firstname { get; set; }
+        public PersonalInfo PersonalInfo { get; set; }
 
-        public string? Lastname { get; set; }
+        public List<UserToken> UserTokens { get; set; }
 
 
-        public Seller? Seller { get; set; }
+        //Seller Properties
 
-        public Customer? Customer { get; set; }
+        public List<Product> Products { get; set; }
+
+        public List<Order> OrdersAsSeller { get; set; }
+        
+
+
+
+        //Customer properties
+
+        public List<BasketItem> Basket { get; set; }
+
+        public List<Order> OrdersAsCustomer { get; set; }
+
+        public List<Feedback> Feedbacks { get; set; }
+
 
     }
 }

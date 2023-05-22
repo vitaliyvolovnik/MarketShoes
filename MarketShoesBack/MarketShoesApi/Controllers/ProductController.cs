@@ -43,11 +43,11 @@ namespace MarketShoesApi.Controllers
         [HttpPost("")]
         public async Task<IActionResult> Create([FromBody]Product product)
         {
-            var IdClaim = User.Claims.FirstOrDefault(c => c.Type == "SellerCustomerIdClime");
-            var sellerId = 0;
-            int.TryParse(IdClaim?.Value, out sellerId);
+            var IdClaim = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
+            var userId = 0;
+            int.TryParse(IdClaim?.Value, out userId);
 
-            return Ok(await _sellerService.CreateAsync(product, sellerId));
+            return Ok(await _sellerService.CreateAsync(product, userId));
         }
 
         [Authorize(Roles = "Seller")]

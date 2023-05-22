@@ -1,5 +1,6 @@
 ﻿using BLL.Services.Interfaces;
 using DLL.Models;
+using DLL.Models.Enums;
 using DLL.Repositories;
 using System;
 using System.Collections.Generic;
@@ -9,26 +10,34 @@ using System.Threading.Tasks;
 
 namespace BLL.Services
 {
-    public class SellerService : ISellerService, IProductService, ICharacteristicService
+    public class SellerService : ISellerService, IProductService, ICharacteristicService,IOrderService
     {
-        private readonly SellerRepository _sellerRepository;
+
         private readonly ProductRepository _productRepository;
         private readonly CharacteristicRepository _characteristicRepository;
         private readonly SubCharacteristicRepository _subCharacteristicRepository;
+        private readonly OrderRepository _orderRepository;
+        private readonly UserRepository _userRepository;
 
-        public SellerService(SellerRepository seller, ProductRepository productRepository, CharacteristicRepository characteristicRepository, SubCharacteristicRepository subCharacteristicRepository)
+        public SellerService( 
+            ProductRepository productRepository, 
+            CharacteristicRepository characteristicRepository, 
+            SubCharacteristicRepository subCharacteristicRepository, 
+            OrderRepository orderRepository,
+            UserRepository userRepository)
         {
-            _sellerRepository = seller;
             _productRepository = productRepository;
             _characteristicRepository = characteristicRepository;
             _subCharacteristicRepository = subCharacteristicRepository;
+            _orderRepository = orderRepository;
+            _userRepository = userRepository;
         }
 
 
         //products
-        public async Task<Product?> CreateAsync(Product product, int sellerId)
+        public async Task<Product?> CreateAsync(Product product, int uesrId)
         {
-            product.SellerId = sellerId;
+            product.SellerId = uesrId;
             return await _productRepository.CreateAsync(product);
         }
 
@@ -112,6 +121,63 @@ namespace BLL.Services
         public async Task<SubCharacteristic?> UpdateAsync(SubCharacteristic characteristic, int id)
         {
             return await _subCharacteristicRepository.UpdeteAsync(characteristic, id);
+        }
+
+
+        //Orders
+        public async Task<IEnumerable<Order>> GetOrdersAsync()
+        {
+            return await _orderRepository.GetAllAsync();
+        }
+
+        public Task<Order?> CreateOrdersAsync(Order order)
+        {
+           return _orderRepository.CreateAsync(order);
+        }
+
+        public async Task<IEnumerable<Order>> CreateOrdersAsync(int customerId)
+        {
+            var user = await _userRepository.FindFirstAsync(x => x.Id == customerId);
+
+            var grouped = user.Basket.GroupBy(x => x.Product.SellerId);
+            var orders = new List<Order>(); 
+
+            foreach(var group in grouped)
+            {
+                var sellerId = group.Key;
+                var orderItems = group.Select(x => new OrderItem()
+                {
+                    Product = x.Product,
+                    Count = x.Count,
+                    SubCharacteristics = x.SubCharacteristics
+                });
+                var order = new Order()
+                {
+                    OrderItems = (List<OrderItem>)orderItems,
+                    SellerId = sellerId,
+                    CustomerId = customerId,
+                    State = OrderStatus.INLINE
+                };
+                var created = await _orderRepository.CreateAsync(order);
+                if (created != null)
+                    orders.Add(created);
+            }
+            return orders;
+        }
+
+        public async Task<IEnumerable<Order>> GetOrdersByCustomerAsync(int customerId)
+        {
+            return await _orderRepository.FindByConditionalAsync(x=>x.CustomerId == customerId);
+        }
+
+        public async Task<IEnumerable<Order>> GetOrdersBySellerAsync(int sellerId)
+        {
+            return await _orderRepository.FindByConditionalAsync(x => x.SellerId == sellerId);
+        }
+
+        public async Task<Order?> ChangeOrderState(int id, OrderStatus orderStatus)
+        {
+            return await _orderRepository.UpdateState(id, orderStatus);
         }
     }
 }

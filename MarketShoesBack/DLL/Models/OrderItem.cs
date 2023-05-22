@@ -6,19 +6,12 @@ using System.Threading.Tasks;
 
 namespace DLL.Models
 {
-    public class Seller
+    public class OrderItem
     {
         public int Id { get; set; }
-
-
-
-
-        public User? User { get; set; }
-
-        public int UserId { get; set; }
-
-        public List<Product> Products { get; set; }
-
+        public Product Product { get; set; }
+        public int Count { get; set; }
+        public List<SubCharacteristic> SubCharacteristics { get; set; }
 
 
     }

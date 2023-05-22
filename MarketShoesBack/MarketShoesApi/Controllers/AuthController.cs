@@ -20,11 +20,13 @@ namespace MarketShoesApi.Controllers
 
         private readonly AuthorizeService _authorizeService;
         private readonly IConfiguration _config;
+        private readonly UserService _userService;
 
-        public AuthController(AuthorizeService service, IConfiguration config)
+        public AuthController(AuthorizeService service, IConfiguration config, UserService userService)
         {
             _authorizeService = service;
             _config = config;
+            _userService = userService;
         }
 
 
@@ -60,7 +62,6 @@ namespace MarketShoesApi.Controllers
             return NotFound();
         }
 
-
         private string GenerateJwt(User user)
         {
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
@@ -70,10 +71,7 @@ namespace MarketShoesApi.Controllers
             {
                 new Claim(ClaimTypes.NameIdentifier,user.Id.ToString()),
                 new Claim(ClaimTypes.Email,user.Email),
-                new Claim(ClaimTypes.GivenName,user.Firstname),
-                new Claim(ClaimTypes.Surname,user.Lastname),
                 new Claim(ClaimTypes.Role,user.Role),
-                new Claim("SellerCustomerIdClime",((user.Role == "Seller")?user.Seller.Id:user.Customer.Id).ToString())
             };
 
             var token = new JwtSecurityToken(_config["Jwt:Issuer"],
@@ -85,7 +83,58 @@ namespace MarketShoesApi.Controllers
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
+        [HttpGet("refresh", Name = "RefreshGWT")]
+        [Authorize]
+        public async Task<IActionResult> Refresh()
+        {
+            var userIdClaim = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
+            var userId = 0;
+            int.TryParse(userIdClaim?.Value, out userId);
 
+            var user = await _userService.GetAsync(userId);
+            if (user == null)
+                return NotFound();
+
+            var jwt = GenerateJwt(user);
+            return Ok(jwt);
+        }
+
+        [AllowAnonymous]
+        [HttpHead("resetPass/{email}", Name = "SendEmailForReset")]
+        public async Task<IActionResult> ResetPassword([FromRoute] string email)
+        {
+            if (await _authorizeService.CreateResetPasswordTokenAsync(email))
+                return Ok();
+            return BadRequest();
+        }
+
+        [AllowAnonymous]
+        [HttpHead("resetPass/{token}/{newPassword}", Name = "ResetPassword")]
+        public async Task<IActionResult> ResetPassword([FromRoute] string token, string newPassword)
+        {
+            if (await _authorizeService.ResetPasswordAsync(token, newPassword))
+                return Ok();
+            return BadRequest();
+        }
+
+
+        [AllowAnonymous]
+        [HttpHead("checkEmailExist/{email}", Name = "isEmailExist")]
+        public async Task<IActionResult> EmailExist([FromRoute] string email)
+        {
+            if (await _authorizeService.isEmailExistAsync(email))
+                return Ok();
+            return NotFound();
+        }
+
+        [AllowAnonymous]
+        [HttpHead("confirmEmail/{token}", Name = "ConfirmEmail")]
+        public async Task<IActionResult> ConfirmEmail([FromRoute] string token)
+        {
+            if (await _authorizeService.ConfirmEmailAsync(token))
+                return Ok();
+            return NotFound();
+        }
 
 
 
