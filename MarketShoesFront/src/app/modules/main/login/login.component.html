@@ -1,0 +1,35 @@
+<div class="login-container">
+  <div class="cross" (click)="close()">
+    ✕
+  </div>
+  <div class="name">
+    Увійти в Акаунт
+  </div>
+  <div class="networks-authenticate">
+    <div class="network">
+      <img src="assets/images/registerElements/Google__G__Logo%201.svg" alt="">
+      <div class="text">
+        Login with google
+      </div>
+    </div>
+    <div class="network">
+      <img src="assets/images/registerElements/Facebook.svg" alt="">
+      <div class="text">
+        Login with facebook
+      </div>
+    </div>
+  </div>
+  <div class="or-label">
+    --або--
+  </div>
+  <form [formGroup]="loginForm" (ngSubmit)="login()" class="reg-form">
+    <div class="form-container">
+      <input formControlName="email" type="text" pInputText placeholder="Email" class="p-inputted">
+      <input formControlName="password" type="password" pInputText placeholder="Пароль">
+      <button pButton pRipple type="submit" label="Створити акаунт" class="p-button-raised"></button>
+    </div>
+  </form>
+</div>
+
+
+

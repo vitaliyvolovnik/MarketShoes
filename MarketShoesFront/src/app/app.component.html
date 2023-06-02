@@ -1,0 +1,15 @@
+<div class="dark" *ngIf="activeElement !==''" (click)="close()">
+</div>
+<app-register class="abs" *ngIf="activeElement ==='register'"
+              (closeClick)="openModalWindow($event)"></app-register>
+<app-login class="abs" *ngIf="activeElement ==='login'"
+              (closeClick)="openModalWindow($event)"></app-login>
+<div class="container">
+  <p-toast></p-toast>
+  <app-market-header (buttonClick)="openModalWindow($event)"></app-market-header>
+
+  <div class="cc1"></div>
+  <app-market-footer></app-market-footer>
+</div>
+
+

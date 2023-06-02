@@ -1,0 +1,216 @@
+.footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 180px;
+  width: 100%;
+  background-color: white;
+
+  &-top {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    .logo-networks {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+
+      & .logo {
+        display: flex;
+
+        & .logo-icon {
+          img{
+            width: 100%;
+            height: 100%;
+          }
+          width: 40px;
+          height: 40px;
+        }
+        & .name {
+          display: flex;
+          margin-left: 6px;
+
+          & .name-element{
+            font-family: 'Montserrat';
+            font-style: normal;
+            font-weight: 800;
+            font-size: 18px;
+            line-height: 22px;
+
+            display: flex;
+            align-items: center;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+
+            color: #FF4C00;
+          }
+
+          & .right {
+            margin-left: 6px;
+          }
+        }
+      }
+
+      & .networks {
+        display: flex;
+        gap: 30px;
+
+        & .networks-element{
+          width: 40px;
+          height: 40px;
+        }
+      }
+    }
+
+    .contacts {
+      display: flex;
+      justify-content: space-between;
+
+      .contact-item {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+
+        .type {
+          display: flex;
+          flex-direction: row;
+          gap: 18px;
+          align-items: center;
+          img{
+            width: 24px;
+          }
+
+          .type-text {
+            font-family: 'Montserrat';
+            font-style: normal;
+            font-weight: 500;
+            line-height: 160%;
+            font-size: 14px;
+
+
+            letter-spacing: 0.03em;
+
+            color: #26221F;
+          }
+        }
+
+        .contact-information {
+          font-family: 'Montserrat';
+          font-style: normal;
+          font-weight: 500;
+          line-height: 160%;
+          font-size: 18px;
+
+
+          letter-spacing: 0.04em;
+          font-feature-settings: 'pnum' on, 'lnum' on;
+
+          color: #26221F;
+        }
+      }
+    }
+  }
+
+  .line {
+    width: 100%;
+    border: 1px solid #ECECEC;
+    margin:24px 0;
+  }
+
+  &-bottom {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+    & .info{
+      display: flex;
+      gap: 120px;
+      & .info-item{
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+
+        & .type{
+          display: flex;
+          flex-direction: row;
+          gap: 18px;
+          align-items: center;
+          img{
+            width: 24px;
+          }
+
+          .type-text {
+            font-family: 'Montserrat';
+            font-style: normal;
+            font-weight: 500;
+            line-height: 160%;
+            font-size: 14px;
+
+
+            letter-spacing: 0.03em;
+
+            color: #26221F;
+          }
+        }
+
+        .information{
+          font-family: 'Montserrat';
+          font-style: normal;
+          font-weight: 500;
+          font-size: 14px;
+          line-height: 160%;
+          letter-spacing: 0.03em;
+
+          color: #000000;
+
+        }
+
+        .photos{
+          display: flex;
+          justify-content: space-between;
+          gap: 24px;
+        }
+      }
+
+
+    }
+    & .privacy-policy {
+      display: flex;
+      justify-content: space-between;
+      flex-direction: row;
+      align-items: center;
+
+      font-family: 'Montserrat';
+      font-style: normal;
+      font-weight: 500;
+      font-size: 18px;
+
+      letter-spacing: 0.04em;
+      font-feature-settings: 'pnum' on, 'lnum' on;
+
+      & .ovner {
+        display: flex;
+      }
+
+      .policy {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 15px;
+        .date{
+          display: flex;
+        }
+        .line{
+          height: 20px;
+          width: 0;
+          border: 1px solid #26221F;
+        }
+        .policy{
+          display: flex;
+        }
+      }
+    }
+  }
+}
