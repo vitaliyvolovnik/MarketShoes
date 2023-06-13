@@ -10,6 +10,8 @@ import {SecurityService} from "../../../services/security.service";
 import {MessageService} from "primeng/api";
 import {first} from "rxjs";
 import {Credentials} from "../../../api/models/Credentials";
+import {SubCharacteristic} from "../../../api/models/SubCharacteristic";
+import {SecurityUser} from "../../../api/models/SecurityUser";
 
 @Component({
   selector: 'app-login',
@@ -37,9 +39,11 @@ export class LoginComponent {
       this.authService.login(credentials)
         .pipe(first())
         .subscribe({
-          next: () => {
+          next: (user:SecurityUser) => {
             this.messageService.add({severity: 'success', summary: 'Авторизація', detail: 'авторизація відбулась успішно'});
-          },
+            this.securityService.login(user);
+            console.log(user)
+            },
           error: (err) => {
             this.messageService.add({severity: 'error', summary: 'Авторизація', detail: 'не вдалося авторизуватися'});
           }

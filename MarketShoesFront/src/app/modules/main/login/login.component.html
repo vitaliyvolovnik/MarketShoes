@@ -22,11 +22,11 @@
   <div class="or-label">
     --або--
   </div>
-  <form [formGroup]="loginForm" (ngSubmit)="login()" class="reg-form">
+  <form [formGroup]="loginForm" (ngSubmit)="login()" class="reg-form" >
     <div class="form-container">
       <input formControlName="email" type="text" pInputText placeholder="Email" class="p-inputted">
       <input formControlName="password" type="password" pInputText placeholder="Пароль">
-      <button pButton pRipple type="submit" label="Створити акаунт" class="p-button-raised"></button>
+      <button pButton pRipple type="submit" label="Увійти в акаунт" class="p-button-raised"></button>
     </div>
   </form>
 </div>

@@ -25,6 +25,14 @@ export class MarketHeaderComponent implements OnInit {
   registerClick() {
     this.buttonClick.emit("register")
   }
+
+  loguot() {
+    this.securityService.logout();
+  }
+
+  basketClick() {
+    this.buttonClick.emit("basket")
+  }
 }
 
 @NgModule({

@@ -31,6 +31,7 @@ namespace DLL.Repositories
             return await Entities
                 .Include(x => x.Characteristics)
                 .ThenInclude(x => x.Characteristic)
+                .Include(x=>x.Photos)
                 .ToListAsync();
         }
 
@@ -41,7 +42,7 @@ namespace DLL.Repositories
                 return null;
 
             product.Price = newProduct.Price;
-            product.Name = newProduct.Name;
+            product.Model = newProduct.Model;
             product.Code = newProduct.Code;
             product.Count = newProduct.Count;
 

@@ -96,7 +96,7 @@ namespace DLL.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("Feedbacks");
+                    b.ToTable("Feedback");
                 });
 
             modelBuilder.Entity("DLL.Models.Order", b =>
@@ -212,10 +212,18 @@ namespace DLL.Migrations
                     b.Property<int>("Count")
                         .HasColumnType("int");
 
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("IsAvailable")
                         .HasColumnType("bit");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("Manufacturer")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Model")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

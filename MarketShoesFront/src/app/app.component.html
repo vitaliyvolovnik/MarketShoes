@@ -4,11 +4,12 @@
               (closeClick)="openModalWindow($event)"></app-register>
 <app-login class="abs" *ngIf="activeElement ==='login'"
               (closeClick)="openModalWindow($event)"></app-login>
+<app-basket class="abs" *ngIf="activeElement ==='basket'"
+           (closeClick)="openModalWindow($event)"></app-basket>
 <div class="container">
   <p-toast></p-toast>
   <app-market-header (buttonClick)="openModalWindow($event)"></app-market-header>
-
-  <div class="cc1"></div>
+  <router-outlet></router-outlet>
   <app-market-footer></app-market-footer>
 </div>
 

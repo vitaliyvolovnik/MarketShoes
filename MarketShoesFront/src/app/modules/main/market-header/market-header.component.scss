@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat:500,800");
+@import "src/variabless.scss";
 *{
   margin:0;
   padding: 0;
@@ -8,8 +9,10 @@
   padding-top: 20px;
   display: flex;
   flex-direction: column;
+  align-items: center;
 
   & .navigation-top {
+    width: $content-width;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -142,6 +145,7 @@
     }
   }
   & .navigation-bottom {
+    width: $content-width;
     display: flex;
     height: 60px;
     align-items: center;

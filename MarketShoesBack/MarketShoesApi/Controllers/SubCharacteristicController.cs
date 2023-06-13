@@ -26,6 +26,13 @@ namespace MarketShoesApi.Controllers
         }
 
         [AllowAnonymous]
+        [HttpGet("", Name = "GetCharacteristics")]
+        public async Task<IActionResult> GetAll()
+        {
+            return Ok(await _sellerService.GetAllCharacteristicsAsync());
+        }
+
+        [AllowAnonymous]
         [HttpGet("characteristic/{characteristicId}", Name = "GetSubByCharacteristicId")]
         public async Task<IActionResult> GetByCharacteristicId([FromRoute] int characteristicId)
         {
@@ -33,8 +40,8 @@ namespace MarketShoesApi.Controllers
         }
 
 
-
-        [Authorize(Roles = "Admin")]
+        [AllowAnonymous]
+        //[Authorize(Roles = "Admin")]
         [HttpPost(Name = "CreateSubChareacteristic")]
         public async Task<IActionResult> Creaet([FromBody] SubCharacteristic characteristic)
         {
@@ -44,7 +51,8 @@ namespace MarketShoesApi.Controllers
             return Ok(created);
         }
 
-        [Authorize(Roles = "Admin")]
+        [AllowAnonymous]
+        //[Authorize(Roles = "Admin")]
         [HttpPut("{id}", Name = "UpdateSubChareacteristic")]
         public async Task<IActionResult> Update([FromBody] SubCharacteristic characteristic, [FromRoute] int id)
         {

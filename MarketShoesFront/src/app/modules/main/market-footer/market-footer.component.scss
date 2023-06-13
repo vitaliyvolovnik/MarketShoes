@@ -1,3 +1,4 @@
+@import "src/variabless.scss";
 .footer {
   display: flex;
   flex-direction: column;
@@ -7,7 +8,7 @@
   background-color: white;
 
   &-top {
-    width: 70%;
+    width: $content-width;
     display: flex;
     flex-direction: column;
     gap: 50px;
@@ -120,7 +121,7 @@
   }
 
   &-bottom {
-    width: 70%;
+    width: $content-width;
     display: flex;
     flex-direction: column;
     gap: 80px;

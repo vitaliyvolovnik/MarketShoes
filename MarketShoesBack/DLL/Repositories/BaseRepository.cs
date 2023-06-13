@@ -18,11 +18,9 @@ namespace DLL.Repositories
         {
             _context = context;
         }
-
         private DbSet<T> entities;
 
         protected DbSet<T> Entities => this.entities ??= _context.Set<T>();
-
 
         public virtual async Task<T?> CreateAsync(T entity)
         {
@@ -32,7 +30,7 @@ namespace DLL.Repositories
                 await this.SaveChangesAsync();
                 return entry.Entity;
             }
-            catch
+            catch(Exception ex)
             {
                 return null;
             }
@@ -52,8 +50,6 @@ namespace DLL.Repositories
         {
             return await Entities.FirstOrDefaultAsync(predicate);
         }
-
-
 
         public async Task SaveChangesAsync()
         {

@@ -19,6 +19,16 @@ namespace DLL.Repositories
         }
 
 
+        public override async Task<IEnumerable<BasketItem>> FindByConditionalAsync(Expression<Func<BasketItem, bool>> predicate)
+        {
+            return await Entities
+                .Include(x => x.Product)
+                .ThenInclude(x=>x.Photos)
+                .Where(predicate)
+                .ToListAsync();
+        }
+
+
         public async Task DeleteAsync(Expression<Func<BasketItem, bool>> predicate)
         {
             Entities.RemoveRange(Entities.Where(predicate));

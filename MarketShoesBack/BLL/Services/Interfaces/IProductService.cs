@@ -18,7 +18,7 @@ namespace BLL.Services.Interfaces
         Task<IEnumerable<Product>> GetAllProductsAsync();
         Task<IEnumerable<Product>> GetProductsAsync(int sellerId);
         Task<IEnumerable<Product>> GetProductsAsync(List<SubCharacteristic> subCharacteristics);
-        Task<IEnumerable<Product>> GetProductsAsync(string name);
+        Task<IEnumerable<Product>> GetProductsAsync(string model);
 
         Task<Product?> ChangeSaleStatusAsync(int productId, bool status);
 

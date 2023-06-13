@@ -1,0 +1,74 @@
+<div class="container">
+  <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+    <div class="title">
+      <div class="text">
+        Основна інформація
+      </div>
+    </div>
+    <div class="content">
+      <div class="row">
+        <span class="p-float-label">
+          <input type="text" id="inputman" pInputText formControlName="Manufacturer">
+          <label for="inputman">Виробник</label>
+        </span>
+        <span class="p-float-label">
+          <input type="text" id="inputmodel" pInputText formControlName="Model">
+          <label for="inputmodel">Модель</label>
+        </span>
+        <span class="p-float-label">
+          <input type="text" id="inputcount" pInputText formControlName="Quantity">
+          <label for="inputcount">Кількість</label>
+        </span>
+        <span class="p-float-label">
+          <input type="text" id="inputprice" pInputText formControlName="Price">
+          <label for="inputprice">Ціна</label>
+        </span>
+      </div>
+      <div class="row">
+        <textarea rows="5" cols="30" pInputTextarea [autoResize]="true" placeholder="Опис" formControlName="Description"></textarea>
+      </div>
+    </div>
+    <div class="title">
+      <div class="text">
+        Характеристики
+      </div>
+    </div>
+    <div class="content">
+      <div class="row characteristics" formArrayName="Characteristics">
+        <div class="group" *ngFor="let characteristic of characteristics;let i = index">
+          <div class="head">
+            {{ characteristic.name }}
+          </div>
+          <div class="field-checkbox" *ngFor="let subCharacteristic of characteristic.subCharacteristics">
+            <p-checkbox name="group1" [value]="subCharacteristic"
+                        inputId="check-{{characteristic.id}}-{{subCharacteristic.id}}"
+                        [formControlName]="i" ></p-checkbox>
+            <label [for]="'check-' + characteristic.id + '-' + subCharacteristic.id">{{ subCharacteristic.name }}</label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="title">
+      <div class="text">
+        Фото
+      </div>
+    </div>
+    <div class="content">
+      <div class="row upload">
+        <p-fileUpload name="demo[]" url="./upload.php"
+                      (onSelect)="onFileSelect($event)"
+                      [multiple]="true" accept="image/*" [maxFileSize]="1000000" [showUploadButton]="false" >
+          <ng-template pTemplate="content">
+            <ul *ngIf="uploadedFiles.length">
+              <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
+            </ul>
+          </ng-template>
+        </p-fileUpload>
+      </div>
+      <div class="row sb-button">
+        <button pButton pRipple type="submit" label="Добавити взуття"></button>
+      </div>
+    </div>
+  </form>
+</div>
+

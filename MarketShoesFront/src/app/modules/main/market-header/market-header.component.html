@@ -18,22 +18,22 @@
       <div class="user-info-element">
         <img src="assets/images/headerElements/user.svg" alt="white">
       </div>
-      <div class="user-info-element">
-        <img src="assets/images/headerElements/heart.svg" alt="white">
-        <div class="circle">
-          <div class="count">
-            2
-          </div>
-        </div>
-      </div>
-      <div class="user-info-element basket">
+      <div class="user-info-element basket" (click)="basketClick()">
         <img src="assets/images/headerElements/iocn-cart.svg" alt="white">
-        <div class="circle">
+        <div class="circle" *ngIf="false">
           <div class="count">
             2
           </div>
         </div>
-        <div class="money">8439₴</div>
+        <div class="money" *ngIf="false">8439₴</div>
+      </div>
+      <div class="user-info-element">
+        <img src="assets/images/headerElements/logout.png" alt="white" (click)="loguot()">
+        <div class="circle"  *ngIf="false">
+          <div class="count">
+            2
+          </div>
+        </div>
       </div>
     </div>
     <div *ngIf="(securityService.isAuthenticated$ | async)===false" class="user-info">

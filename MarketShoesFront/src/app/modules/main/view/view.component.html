@@ -1,0 +1,41 @@
+<div class="container">
+
+    <div class="content">
+      <div class="filters">
+        <div class="filter" *ngFor="let characteristic of characteristics;">
+          <div class="filter-header">
+            {{characteristic.name }}
+            <img *ngIf="isHide[characteristic.id-1]" src="assets/images/arrow.svg" (click)="ToggleHide(characteristic.id-1)"
+                 class="arr" style="transform: rotate(-180deg);" alt="">
+            <img *ngIf="!isHide[characteristic.id-1]" src="assets/images/arrow.svg"
+                 (click)="ToggleHide(characteristic.id-1)" class="arr" alt="">
+          </div>
+            <div [ngClass]="(!isHide[characteristic.id-1])? 'hide': 'view'"
+                 class="field-checkbox" *ngFor="let subCharacteristic of characteristic.subCharacteristics">
+              <p-checkbox name="group1" [value]="subCharacteristic" inputId="{{subCharacteristic.id}}"></p-checkbox>
+              <label [for]="subCharacteristic.id">{{subCharacteristic.name}}</label>
+            </div>
+        </div>
+
+      </div>
+      <div class="items">
+        <div class="item-header">
+          <img src="assets/images/view/rigth.png" width="500px" alt="">
+          <img src="assets/images/view/left.png"  width="500px" alt="">
+        </div>
+        <div class="item-list">
+          <div class="item" *ngFor="let item of shoes">
+            <img src="{{item.photos[0].path}}" alt="">
+            <div class="name" routerLink="shoes/{{item.id}}">{{item.manufacturer}} {{item.model}}</div>
+            <div class="price-card">
+              <div class="price">{{item.price}} ₴</div>
+              <div class="cart">
+                <img class="cart-logo" src="assets/images/view/cart.svg" alt="">
+                <div class="txt" (click)="addToCart(item.id)">add to cart</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>

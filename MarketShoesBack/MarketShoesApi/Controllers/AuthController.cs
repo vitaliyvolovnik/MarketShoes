@@ -36,8 +36,9 @@ namespace MarketShoesApi.Controllers
             var user = await _authorizeService.LoginAsync(loginModel);
             if (user != null)
             {
-                var token = GenerateJwt(user);
-                return Ok(token);
+                user.JWToken = GenerateJwt(user);
+                
+                return Ok(user);
             }
             return NotFound("User not found");
         }
@@ -46,7 +47,9 @@ namespace MarketShoesApi.Controllers
         [HttpPost("register", Name = "Register")]
         public async Task<IActionResult> Register([FromBody] RegisterationModel registerationModel)
         {
-            var user = await _authorizeService.Registration(registerationModel);
+            string requestUrl = Request.Headers["Referer"];
+
+            var user = await _authorizeService.Registration(registerationModel, requestUrl);
             if (user == null)
                 return BadRequest();
             return Ok();
@@ -61,7 +64,7 @@ namespace MarketShoesApi.Controllers
             return NotFound();
         }
 
-        private string GenerateJwt(User user)
+        private string GenerateJwt(UserViewModel user)
         {
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
@@ -80,6 +83,11 @@ namespace MarketShoesApi.Controllers
                signingCredentials: credentials);
 
             return new JwtSecurityTokenHandler().WriteToken(token);
+        }
+
+        private string GenerateJwt(User user)
+        {
+           return  GenerateJwt(new UserViewModel(user));
         }
 
         [HttpGet("refresh", Name = "RefreshGWT")]
@@ -102,7 +110,8 @@ namespace MarketShoesApi.Controllers
         [HttpHead("resetPass/{email}", Name = "SendEmailForReset")]
         public async Task<IActionResult> ResetPassword([FromRoute] string email)
         {
-            if (await _authorizeService.CreateResetPasswordTokenAsync(email))
+            string requestUrl = Request.Headers["Referer"];
+            if (await _authorizeService.CreateResetPasswordTokenAsync(email, requestUrl))
                 return Ok();
             return BadRequest();
         }

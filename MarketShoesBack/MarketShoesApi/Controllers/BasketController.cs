@@ -13,10 +13,12 @@ namespace MarketShoesApi.Controllers
     {
 
         private readonly CustomerService _customerService;
+        private readonly IUrlHelper _urlHelper;
 
-        public BasketController(CustomerService customerService)
+        public BasketController(CustomerService customerService, IUrlHelper urlHelper)
         {
             _customerService = customerService;
+            _urlHelper = urlHelper;
         }
 
 
@@ -28,7 +30,7 @@ namespace MarketShoesApi.Controllers
             var userId = 0;
             int.TryParse(IdClaim?.Value, out userId);
 
-            var created = _customerService.AddToBasketAsync(basket, userId);
+            var created = await _customerService.AddToBasketAsync(basket, userId);
 
             if (created == null)
                 return BadRequest();
@@ -36,7 +38,47 @@ namespace MarketShoesApi.Controllers
             return Ok(created);
 
         }
-        
+
+        [Authorize]
+        [HttpPost("{id}", Name = "AddItemToBasketById")]
+        public async Task<IActionResult> AddItem([FromRoute] int id)
+        {
+            var IdClaim = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
+            var userId = 0;
+            int.TryParse(IdClaim?.Value, out userId);
+
+            var created = await _customerService.AddToBasketAsync(id, userId);
+
+            if (created == null)
+                return BadRequest();
+
+            return Ok(created);
+
+        }
+
+        [Authorize]
+        [HttpGet(Name = "GetUserBasket")]
+        public async Task<IActionResult> Get()
+        {
+            var IdClaim = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
+            var userId = 0;
+            int.TryParse(IdClaim?.Value, out userId);
+
+            var created = (await _customerService.GetBasketAsync(userId)).ToList();
+
+            var baseUrl = $"{Request.Scheme}://{Request.Host}";
+
+
+            created.ForEach(p => p.Product.Photos.ForEach(ph =>
+            {
+                var imagePath = _urlHelper.Content($"~/uploads/{ph.Path}");
+                ph.Path = $"{baseUrl}{imagePath}";
+            }));
+
+            return Ok(created);
+
+        }
+
 
         [Authorize]
         [HttpPut("{id}",Name = "UpdateItem")]

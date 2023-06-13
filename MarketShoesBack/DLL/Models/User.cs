@@ -15,7 +15,6 @@ namespace DLL.Models
 
         public bool IsEmailConfirm { get; set; }
 
-        [JsonIgnore]
         public string? Password { get; set; }
         
         public string? Role { get; set; }

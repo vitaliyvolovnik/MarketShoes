@@ -15,6 +15,9 @@ import {CheckboxModule} from "primeng/checkbox";
 import {InputTextModule} from "primeng/inputtext";
 import {RippleModule} from "primeng/ripple";
 import {LoginModule} from "./modules/main/login/login.component";
+import {RouterModule, RouterOutlet} from "@angular/router";
+import {AppRoutingModule} from "./app-routing.module";
+import {BasketModule} from "./modules/main/basket/basket.component";
 
 @NgModule({
   bootstrap: [AppComponent],
@@ -22,21 +25,20 @@ import {LoginModule} from "./modules/main/login/login.component";
     AppComponent,
     MarketFooterComponent,
   ],
-  imports: [
-    BrowserAnimationsModule,
-    BrowserModule,
-    HeaderModule,
-    RegisterModule,
-    FormsModule,
-    HttpClientModule,
-    ToastModule,
-    ButtonModule,
-    CheckboxModule,
-    InputTextModule,
-    ReactiveFormsModule,
-    RippleModule,
-    LoginModule
-  ],
+    imports: [
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        BrowserModule,
+        HeaderModule,
+        RegisterModule,
+        HttpClientModule,
+        ToastModule,
+        CheckboxModule,
+        InputTextModule,
+        LoginModule,
+        RouterOutlet,
+        BasketModule
+    ],
   providers: [MessageService]
 })
 export class AppModule { }

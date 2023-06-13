@@ -1,8 +1,11 @@
 using BLL.Configurations;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-
+using Newtonsoft.Json;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -14,10 +17,23 @@ var config = new ConfigurationBuilder()
 
 
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
+    });
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
+builder.Services.AddScoped<IUrlHelper>(x => {
+    var actionContext = x.GetRequiredService<IActionContextAccessor>().ActionContext;
+    var factory = x.GetRequiredService<IUrlHelperFactory>();
+    return factory.GetUrlHelper(actionContext);
+});
+
+
 
 ConfigureBll.Configere(builder.Services, config["ConnectionString"]);
 

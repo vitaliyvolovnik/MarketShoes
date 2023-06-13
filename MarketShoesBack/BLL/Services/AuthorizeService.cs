@@ -21,7 +21,7 @@ namespace BLL.Services
             _userTokenRepository = userTokenRepository;
         }
 
-        public async Task<User?> Registration(RegisterationModel registeration)
+        public async Task<User?> Registration(RegisterationModel registeration,string url)
         {
             if (!_userRepository.IsEmailExistAsync(registeration.Email).Result)
             {
@@ -47,7 +47,7 @@ namespace BLL.Services
                 var registeredUser = await _userRepository.CreateAsync(user);
 
                 if (registeredUser != null)
-                    _emailService.SendEmailConfirmationLink(guid, registeredUser.Email);
+                    _emailService.SendEmailConfirmationLink(guid, registeredUser.Email, url);
 
                 return registeredUser;
 
@@ -56,9 +56,12 @@ namespace BLL.Services
                 return null;
         }
 
-        public async Task<User?> LoginAsync(LoginModel login)
+        public async Task<UserViewModel?> LoginAsync(LoginModel login)
         {
-            return await _userRepository.LoginAsync(login.Email,HashPassword(login.Password));
+            var user = await _userRepository.LoginAsync(login.Email, HashPassword(login.Password));
+            if (user == null)
+                return null;
+            return new UserViewModel(user);
         }
 
         public async Task<bool> ChangePasswordAsync(ChangePasswordModel model)
@@ -84,7 +87,7 @@ namespace BLL.Services
             return await _userRepository.ResetPasswordAsync(userToken.User.Id, HashPassword(password));
         }
 
-        public async Task<bool> CreateResetPasswordTokenAsync(string email)
+        public async Task<bool> CreateResetPasswordTokenAsync(string email, string url)
         {
 
             var user = await _userRepository.FindFirstAsync(x => x.Email == email);
@@ -105,7 +108,7 @@ namespace BLL.Services
             if (created == null)
                 return false;
 
-            _emailService.SendPasswordResetEmail(guid, email);
+            _emailService.SendPasswordResetEmail(guid, email,url);
 
             return true;
         }

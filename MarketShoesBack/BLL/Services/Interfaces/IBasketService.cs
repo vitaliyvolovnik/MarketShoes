@@ -11,7 +11,7 @@ namespace BLL.Services.Interfaces
     {
 
 
-
+        Task<IEnumerable<BasketItem>> GetBasketAsync(int userId);
 
         Task<BasketItem?> AddToBasketAsync(BasketItem element,int customerId);
 

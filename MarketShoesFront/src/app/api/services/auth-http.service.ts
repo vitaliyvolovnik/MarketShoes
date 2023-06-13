@@ -27,5 +27,9 @@ export class AuthHttpService {
     return this.httpClient.post(`${this.URL}/register`,register,this.httpOptions)
   }
 
+  confirm(token:string){
+    return this.httpClient.head(`${this.URL}/confirmEmail/${token}`);
+  }
+
 
 }

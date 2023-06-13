@@ -11,7 +11,7 @@ namespace DLL.Models
         public int Id { get; set; }
         public Product Product { get; set; }
         public int Count { get; set; }
-        public List<SubCharacteristic> SubCharacteristics { get; set; }
+        public List<SubCharacteristic>? SubCharacteristics { get; set; }
 
 
     }

@@ -1,0 +1,153 @@
+@import "src/variabless.scss";
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300&display=swap');
+
+
+.container{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  .content{
+    margin-top: 80px;
+    display: flex;
+    justify-content: space-between;
+    width: $content-width;
+    align-items: stretch;
+    min-height: 800px;
+    gap: 50px;
+    padding-bottom: 100px;
+    .filters{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 400px;
+      gap: 20px;
+      .filter{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+
+        .filter-header{
+
+          font-family: 'Montserrat';
+          font-style: normal;
+          font-weight: 700;
+          font-size: 20px;
+          line-height: 160%;
+
+          letter-spacing: 0.05em;
+          text-transform: uppercase;
+
+          border-bottom: 1px solid #D2D1CD;
+
+          color: #26221F;
+          position: relative;
+          .arr{
+            position: absolute;
+            right: 5px;
+            top:20%;
+          }
+        }
+
+        .field-checkbox{
+          display: flex;
+          gap: 12px;
+          align-items: center;
+          padding:10px 0;
+
+          font-family: 'Montserrat';
+          font-style: normal;
+          font-weight: 500;
+          font-size: 14px;
+          line-height: 160%;
+          /* or 22px */
+
+          letter-spacing: 0.03em;
+
+          /* Black */
+
+          color: #26221F;
+        }
+        .hide{
+          display: none;
+        }
+      }
+    }
+    .items
+    {
+
+      .item-header{
+        display: flex;gap: 50px;
+        justify-content: space-between;
+      }
+      .item-list{
+        margin-top: 50px;
+
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        gap: 5%;
+
+        .item{
+          width: 30%;
+          margin-top: 30px;
+          background-color: #ffffff;
+          display: flex;
+          flex-direction: column;
+          align-items: stretch;
+          padding: 20px;
+          gap:15px;
+
+
+          img{
+            width: 100%;
+          }
+          .name{
+            margin-left: 10px;
+            font-family: 'Montserrat';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 18px;
+            line-height: 160%;
+            height: 60px;
+            color: #26221F;
+
+            cursor:pointer;
+          }
+          .price-card{
+            margin-left: 10px;
+            display: flex;
+            justify-content: space-between;
+            .price{
+              font-family: 'Montserrat' ,sans-serif;
+              font-style: normal;
+              font-weight: 700;
+              font-size: 20px;
+              line-height: 170%;
+
+              color: #26221F;
+            }
+            .cart{
+              font-family: 'Manrope',sans-serif;
+              font-style: normal;
+              font-weight: 400;
+              font-size: 15px;
+              line-height: 133.74%;
+              color: #FF4C00;
+              display: flex;
+              gap: 12px;
+              align-items: center;
+              cursor:pointer;
+              .cart-logo{
+                width: 20px;
+              }
+
+            }
+          }
+        }
+
+      }
+    }
+  }
+}
+

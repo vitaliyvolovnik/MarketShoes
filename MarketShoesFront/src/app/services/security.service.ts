@@ -43,7 +43,7 @@ export class SecurityService {
   }
 
   getToken():string|null{
-    return  this.getUser()?.jwtBearer;
+    return  this.getUser()?.jwToken;
   }
 
   private removeUserFromLocaleStorage(){

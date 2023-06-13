@@ -5,5 +5,5 @@ export interface SecurityUser{
   email:string;
   role:Role;
   active:boolean;
-  jwtBearer:string;
+  jwToken:string;
 }

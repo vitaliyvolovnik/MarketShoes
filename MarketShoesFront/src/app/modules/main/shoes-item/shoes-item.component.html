@@ -1,1 +1,106 @@
-<p>shoes-item works!</p>
+<div class="container">
+  <div class="content first">
+    <div class="images">
+      <div class="main">
+        <img src="{{product?.photos[0]?.path}}">
+      </div>
+      <div class="galleria" *ngIf="false">
+        <div class="arrow">
+          <img src="assets/images/item/arrow-left.svg" alt="">
+        </div>
+        <div class="item">
+
+        </div>
+        <div class="item">
+
+        </div>
+        <div class="item">
+
+        </div>
+        <div class="arrow">
+          <img src="assets/images/item/arrow-right.svg" alt="">
+        </div>
+      </div>
+    </div>
+    <div class="main-info">
+      <div class="name">
+        {{product?.manufacturer}} {{product?.model}}
+      </div>
+      <div class="price">
+        <div class="count">
+          {{product?.price}}
+        </div>
+        <div class="currency">
+          UAN
+        </div>
+      </div>
+      <div class="adv">
+        <div class="element">
+          <img src="assets/images/item/v.png" alt="">
+          <div class="text"> Доставка протягом 3 днів</div>
+        </div>
+        <div class="element">
+          <img src="assets/images/item/v.png" alt="">
+          <div class="text"> Гарантія</div>
+        </div>
+        <div class="element">
+          <img src="assets/images/item/v.png" alt="">
+          <div class="text"> Якість</div>
+        </div>
+        <div class="element">
+          <img src="assets/images/item/v.png" alt="">
+          <div class="text"> Оригінал</div>
+        </div>
+      </div>
+      <div class="size">
+        розмір в наявності: 42; 43; 44; 45.
+      </div>
+      <div class="btns">
+        <button pButton pRipple type="button" label="Купити зараз"></button>
+        <button pButton pRipple type="button" label="Добавити в кошик" class="p-button-secondary"></button>
+      </div>
+    </div>
+  </div>
+  <div class="title">
+    <div class="text">
+      Про взуття:
+    </div>
+  </div>
+  <div class="content second">
+    <div class="information">
+      <div class="header">{{product?.manufacturer}}</div>
+      <div class="title-inner">{{product?.model}} </div>
+      <div class="text-inf">{{product?.description}}
+      </div>
+      <div class="title-inner title-inner-second">Деталі:</div>
+      <div class="characteristics">
+        <div class="char">
+          Колір:Сірий
+        </div>
+        <div class="char">
+          Розмір:  42, 43, 44, 45
+        </div>
+      </div>
+    </div>
+    <div class="shoes-img">
+      <img src="{{product?.photos[0]?.path}}">
+    </div>
+  </div>
+  <div class="title">
+    <div class="text">
+      Про взуття:
+    </div>
+  </div>
+  <div class="content similar">
+    <div class="shoes-items">
+      <div class="shoes-item"> </div>
+      <div class="shoes-item"> </div>
+      <div class="shoes-item"> </div>
+    </div>
+    <div class="rectangles">
+      <div class="rec active"></div>
+      <div class="rec"></div>
+      <div class="rec"></div>
+    </div>
+  </div>
+</div>

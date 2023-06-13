@@ -32,18 +32,20 @@ namespace BLL.Services
             _orderRepository = orderRepository;
             _userRepository = userRepository;
         }
-
-
         //products
         public async Task<Product?> CreateAsync(Product product, int uesrId)
         {
             product.SellerId = uesrId;
+            var characteristicIds = product.Characteristics.Select(c => c.Id).ToList();
+            product.Characteristics = (await _subCharacteristicRepository
+                .FindByConditionalAsync(x => characteristicIds.Contains(x.Id))).ToList();
             return await _productRepository.CreateAsync(product);
         }
 
         public async Task<IEnumerable<Product>> GetProductsAsync(List<SubCharacteristic> subCharacteristics)
         {
-            return await _productRepository.FindByConditionalAsync(x => x.Characteristics.Any(y => subCharacteristics.Any(s => s.Name == y.Name)));
+            return await _productRepository.FindByConditionalAsync(x => x.Characteristics
+            .Any(y => subCharacteristics.Any(s => s.Name == y.Name)));
         }
 
         public async Task<IEnumerable<Product>> GetProductsAsync(int sellerId)
@@ -56,9 +58,9 @@ namespace BLL.Services
             return await _productRepository.GetAllAsync();
         }
 
-        public async Task<IEnumerable<Product>> GetProductsAsync(string name)
+        public async Task<IEnumerable<Product>> GetProductsAsync(string model)
         {
-            return await _productRepository.FindByConditionalAsync(x => x.Name == name);
+            return await _productRepository.FindByConditionalAsync(x => x.Model == model);
         }
 
         public async Task<Product?> GetProductAsync(int id)

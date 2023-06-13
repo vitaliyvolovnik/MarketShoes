@@ -1,0 +1,54 @@
+@import "src/variabless.scss";
+.container{
+
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  position: relative;
+  min-height: 1500px;
+  padding-bottom: 720px;
+
+  router-outlet{
+    width:100%
+  }
+}
+
+body {
+  position: relative;
+
+
+}
+
+app-market-header{
+ width: 100%;
+}
+app-market-footer{
+  width:100%;
+  display: flex;
+  justify-content: center;
+}
+
+
+.cc1{
+ height: 900px;
+}
+
+.dark{
+  background: rgba(0, 0, 0, 0.76);
+  position:fixed;
+  left: 0; right: 0;
+  top: 0; bottom: 0;
+
+  z-index:2;
+}
+.abs {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+}
+app-market-footer{
+  position: absolute;
+  bottom: 0;
+}

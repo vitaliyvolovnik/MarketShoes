@@ -1,0 +1,26 @@
+<div class="login-container">
+  <div class="cross" (click)="close()">
+    ✕
+  </div>
+  <div class="name">
+    Корзина
+  </div>
+  <div class="cards">
+    <div class="card" *ngFor="let item of items">
+      <img src="{{item.product.photos[0].path}}" alt="">
+      <div class="name-1">
+        {{item.product.manufacturer}}<br>{{item.product.model}}
+      </div>
+      <div class="price">
+        {{item.product.price}} грн
+      </div>
+      <div class="element-cross" (click)="removeFromBusket(item.id)">
+        ✕
+      </div>
+    </div>
+  </div>
+  <div>
+    <button pButton pRipple type="submit" label="Створити замовлення" class="p-button-raised"></button>
+  </div>
+
+</div>

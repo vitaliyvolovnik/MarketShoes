@@ -14,12 +14,20 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="6.28.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.28.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\BLL\BLL.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\uploads\5d3b14d1-58cc-4045-a826-9be817e82497_Практичне завдання_Воловнік %286%29.jpg" />
+    <None Include="wwwroot\uploads\5de20498-3335-41a4-80f4-ebeb801cf663_Практичне завдання_Воловнік %285%29.jpg" />
+    <None Include="wwwroot\uploads\68d3c2b4-db6d-46e3-ba22-9097fc108e6c_Практичне завдання_Воловнік %287%29.jpg" />
+    <None Include="wwwroot\uploads\e542526b-1274-4476-a60e-357f601382e3_Практичне завдання_Воловнік %286%29.jpg" />
   </ItemGroup>
 
 </Project>
